@@ -18,7 +18,6 @@ HMODULE DLL_Module = 0;
 DWORD _stdcall MainThread(LPVOID param)
 {
 	printf("[MainThread] Application startuped\n");
-
 	
 	DetourTransactionBegin();
 	DetourUpdateThread(GetCurrentThread());

@@ -31,40 +31,6 @@ wchar_t* charToWChar(const char* text)
 
 
 DWORD __fastcall hGetWindowFunc(void* pBaseClass, void* edx, char* dialogname) {
-
-	//printf("\r\n[WINDOW] Pointer: %p Dialog: %p", pThis, dialogname);
-
-	/*if (GetAsyncKeyState(VK_NUMPAD4) & 0x8000) {
-
-		//void* pCreateHero = reinterpret_cast<void*>(Functions::GetWindowFunc(pBaseClass, (char*)"Win_Create"));
-		//Functions::ShowWindowFunc(pCreateHero, 1, 0, 1);
-
-		string WindowName;
-		getline(cin, WindowName);
-
-		void* pWindow = reinterpret_cast<void*>(Functions::GetWindowFunc(pBaseClass, (char*)WindowName.c_str()));
-
-		if(!pWindow)
-			return Functions::GetWindowFunc(pBaseClass, dialogname);
-
-		Functions::ShowWindowFunc(pWindow, 1, 0, 1);
-
-		if (!Stored) {
-			Base = pBaseClass;
-			Stored = true;
-		}
-			
-
-		DWORD addy = 0x005A3830;
-		const char* command = "offline";
-		_asm {
-			push pWindow
-			push command
-			mov ecx, Base
-			call addy
-		}
-
-	}*/
 		
 	retries++;
 
