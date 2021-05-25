@@ -3,9 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AutoLogin"
+        xmlns:local="clr-namespace:AutoLogin.ViewModel"
         mc:Ignorable="d"
-        Title="AddAccount" Height="350" Width="450" ResizeMode="NoResize">
+        Title="Добавление нового аккаунта" Height="400" Width="450" ResizeMode="NoResize">
     <Window.Resources>
         <Style x:Key="Flat_Button" TargetType="{x:Type Button}">
 
@@ -85,7 +85,11 @@
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
         </Style>
     </Window.Resources>
-    
+
+    <Window.DataContext>
+        <local:AddAccountViewModel/>
+    </Window.DataContext>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="45*"/>
@@ -95,15 +99,26 @@
             <RowDefinition Height="45*"/>
             <RowDefinition Height="35*"/>
             <RowDefinition Height="45*"/>
+            <RowDefinition Height="35*"/>
+            <RowDefinition Height="45*"/>
             <RowDefinition Height="45*"/>
         </Grid.RowDefinitions>
-        
-        <TextBox x:Name="tbName" Grid.Row="1" Style="{StaticResource TextBoxStyle}" Text="Название записи"  />
-        <TextBox x:Name="tbLogin" Grid.Row="3" Style="{StaticResource TextBoxStyle}" Text="Логин" />
+
+        <TextBox x:Name="tbName" Grid.Row="1" Style="{StaticResource TextBoxStyle}" Text="{Binding Path=CreateAccount.Name}"/>
+        <TextBox x:Name="tbLogin" Grid.Row="3" Style="{StaticResource TextBoxStyle}" Text="{Binding Path=CreateAccount.Login}" />
         <PasswordBox x:Name="tbPass" Grid.Row="5"
                      FontSize="15"
                      VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                      Margin="20 0 20 5" />
-        <Button  Grid.Row="7" Content="Сохранить данные" FontSize="15" Style="{StaticResource Flat_Button}" Click="Button_Click" />
+        <ComboBox Grid.Row="7" x:Name="isClass" SelectedItem="{Binding Path=SelectedClass}" Margin="20 0 20 5">
+            <ComboBoxItem Content="Вар" IsSelected="True"/>
+            <ComboBoxItem Content="Маг"/>
+            <ComboBoxItem Content="Танк"/>
+            <ComboBoxItem Content="Друид"/>
+            <ComboBoxItem Content="Лучник"/>
+            <ComboBoxItem Content="Прист"/>
+        </ComboBox>
+        <Button  Grid.Row="9" Content="Сохранить данные" FontSize="15" Style="{StaticResource Flat_Button}" Command="{Binding AddAccountRow}"
+                 CommandParameter="{Binding ElementName=tbPass}" IsDefault="True"/>
     </Grid>
 </Window>

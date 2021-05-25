@@ -3,10 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AutoLogin"
+        xmlns:local="clr-namespace:AutoLogin.ViewModel"
+        xmlns:data="clr-namespace:AutoLogin"
         mc:Ignorable="d"
-        Title="Pwclassic Autologin"
-        ResizeMode="CanMinimize" Height="450" Width="800" WindowStyle="SingleBorderWindow" Closing="AutoLogin_Closing" Loaded="AutoLogin_Loaded">
+        Title="PWClassic Autologin"
+        ResizeMode="CanMinimize" Height="800" Width="800" WindowStyle="SingleBorderWindow">
 
     <Window.Resources>
         <Style x:Key="Flat_Button" TargetType="{x:Type Button}">
@@ -132,33 +133,69 @@
 
     </Window.Resources>
 
+    <Window.DataContext>
+        <local:MainViewModel/>
+    </Window.DataContext>
+
     <Grid Background="Azure">
         <Grid.RowDefinitions>
-            <RowDefinition Height="368*"/>
-            <RowDefinition Height="51*"/>
+            <RowDefinition Height="370*"/>
+            <RowDefinition Height="50*"/>
         </Grid.RowDefinitions>
 
-        <ListBox Style="{StaticResource lst1}" 
+        <local:BindableMultiSelectListView
             x:Name="lstBox" 
             FontSize="15"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch"
-            MouseDoubleClick="ListBoxItem_MouseDoubleClick">
+            SelectedItems="{Binding Path=SelectedAccount, Mode=OneWayToSource}"
+            ItemsSource="{Binding Path=Accounts}"
+            MouseDoubleClick="{data:MethodBinding LoginSelectedAccount, {Binding Path=SelectedAccount}}"
+            SelectionMode="Extended">
 
-            <ListBox.ContextMenu>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="600"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="{Binding Name}" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        <Image Grid.Column="1" Source="{Binding Path=ClassImage}" HorizontalAlignment="Center"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Style.Setters>
+                        <Setter Property="Foreground" Value="Black" />
+                        <Setter Property="Height" Value="80"/>
+                        <Setter Property="FontSize" Value="20"/>
+                        <Setter Property="FontStyle" Value="Normal"/>
+                        <Setter Property="Padding" Value="20 0 20 0"/>
+                    </Style.Setters>
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Foreground" Value="Green"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.ItemContainerStyle>
+
+            <ListView.ContextMenu>
                 <ContextMenu Name="cm">
-                    <MenuItem Header="Удалить" Click="MenuItem_Click"/>
+                    <MenuItem Header="Запустить выбранные" Click="{data:MethodBinding StartSelectedAccounts, {Binding Path=SelectedAccount}}"/>
+                    <MenuItem Header="Удалить" Click="{data:MethodBinding DeleteSelectedAccount, {Binding Path=SelectedAccount}}"/>
                 </ContextMenu>
-            </ListBox.ContextMenu>
-            
-         </ListBox>
-
-            <Button Grid.Row="1"
+            </ListView.ContextMenu>
+        </local:BindableMultiSelectListView>
+        
+        <Button Grid.Row="1"
                 Foreground="White"
                 HorizontalContentAlignment="Stretch"
                 Style="{StaticResource Flat_Button}"
                 FontSize="20"
-                Content="Добавить аккаунт" Click="Button_Click"/>
+                Content="Добавить аккаунт" Command="{Binding ShowAccountForm}"/>
 
     </Grid>
 

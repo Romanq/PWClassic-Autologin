@@ -126,17 +126,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="MethodBinding.cs" />
+    <Compile Include="RelayCommand.cs" />
+    <Compile Include="ViewModel\AddAccountViewModel.cs" />
+    <Compile Include="ViewModel\BindableBase.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="Window API\Pinvoke.cs" />
-    <Page Include="AddAccount.xaml">
+    <Page Include="View\AddAccount.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="Accounts\AccountContainer.cs" />
-    <Compile Include="AddAccount.xaml.cs">
+    <Compile Include="View\AddAccount.xaml.cs">
       <DependentUpon>AddAccount.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
@@ -146,7 +151,7 @@
     <Compile Include="BasicInject.cs" />
     <Compile Include="IniFile.cs" />
     <Compile Include="Logic.cs" />
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>

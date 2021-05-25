@@ -34,8 +34,6 @@ namespace AutoLogin
                     {
                         Thread.Sleep(150);
                     }
-                    
-                   
 
                     Injector injector = new Injector(proc);
                     
@@ -47,7 +45,7 @@ namespace AutoLogin
 
                     int width = rct.Right - rct.Left + 1;
                     int height = rct.Bottom - rct.Top + 1;
-                    Pinvoke.MoveWindow(proc.MainWindowHandle, -5, 0, width, height, true);
+                    Pinvoke.MoveWindow(proc.MainWindowHandle, 0, 0, width, height, true);
 
                     //File.AppendAllText("Autologin.log", $"Путь до dll {dll} + result = {result}" + Environment.NewLine);
                 }

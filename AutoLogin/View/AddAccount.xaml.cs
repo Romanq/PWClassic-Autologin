@@ -17,14 +17,7 @@ namespace AutoLogin
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var section = Logic.ini.Sections.Add(tbName.Text);
-            section.Keys.Add("Login", tbLogin.Text);
-            section.Keys.Add("Password", tbPass.Password);
-
-            Logic.ini.Save("Config.ini");
-
-
-            this.Close();
+            
         }
     }
 }
