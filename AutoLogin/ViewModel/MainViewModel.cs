@@ -99,10 +99,11 @@ namespace AutoLogin.ViewModel
             foreach (var item in selectedAccounts)
             {
                 var converted = item as Account;
-                if (converted.Login == "" || converted.Password == "")
+                if (converted.Login == "" || converted.Password == ""
+                    || converted.Login is null || converted.Password is null)
                     return;
 
-                BasicInject inject = new BasicInject(converted.Login, converted.Password);
+
             }
         }
 
@@ -148,7 +149,7 @@ namespace AutoLogin.ViewModel
                 if (Accs[i].Login == "" || Accs[i].Password == "")
                     return;
 
-                BasicInject inject = new BasicInject(Accs[i].Login, Accs[i].Password);
+                
             }
 
         }
