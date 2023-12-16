@@ -91,6 +91,10 @@
     </Window.DataContext>
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="143*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="45*"/>
             <RowDefinition Height="35*"/>
@@ -104,16 +108,20 @@
             <RowDefinition Height="45*"/>
         </Grid.RowDefinitions>
 
-        <TextBox x:Name="tbName" Grid.Row="1" Style="{StaticResource TextBoxStyle}" Text="{Binding Path=CreateAccount.Name}"/>
-        <TextBox x:Name="tbLogin" Grid.Row="3" Style="{StaticResource TextBoxStyle}" Text="{Binding Path=CreateAccount.Login}" />
-        <PasswordBox x:Name="tbPass" Grid.Row="5"
-                     FontSize="15"
-                     VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                     Margin="20 0 20 5" />
-        <ComboBox Grid.Row="7" ItemsSource="{Binding Path=Hero_classes}" x:Name="isClass" SelectedItem="{Binding Path=SelectedClass}" Margin="20 0 20 5">
+        <Label Content="Account note:" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="tbName" Style="{StaticResource TextBoxStyle}" Text="{Binding Path=CreateAccount.Name}" Grid.ColumnSpan="2" Margin="20,42,20,42" Grid.RowSpan="3"/>
 
-        </ComboBox>
-        <Button  Grid.Row="9" Content="Сохранить данные" FontSize="15" Style="{StaticResource Flat_Button}" Command="{Binding AddAccountRow}"
-                 CommandParameter="{Binding ElementName=tbPass}" IsDefault="True"/>
+        <Label Content="Account login:" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="tbLogin" Grid.Row="2" Style="{StaticResource TextBoxStyle}" Text="{Binding Path=CreateAccount.Login}" Grid.ColumnSpan="2" Margin="20,42,20,42" Grid.RowSpan="3" />
+
+        <Label Content="Account password:" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+        <PasswordBox x:Name="tbPass" Grid.Row="4"
+                     FontSize="15"
+                     Margin="20,42,20,5" Grid.ColumnSpan="2" Grid.RowSpan="2" />
+
+        <Label Content="Class:" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+        <ComboBox Grid.Row="7" ItemsSource="{Binding Path=Hero_classes}" x:Name="isClass" SelectedItem="{Binding Path=SelectedClass}" Margin="20 0 20 5" Grid.ColumnSpan="2"/>
+        <Button  Grid.Row="9" Content="Save" FontSize="15" Style="{StaticResource Flat_Button}" Command="{Binding AddAccountRow}"
+                 CommandParameter="{Binding ElementName=tbPass}" IsDefault="True" Grid.ColumnSpan="2"/>
     </Grid>
 </Window>

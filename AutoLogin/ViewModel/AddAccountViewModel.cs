@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace AutoLogin.ViewModel
@@ -18,13 +19,13 @@ namespace AutoLogin.ViewModel
                 return _AddAccountRow ??
                     (_AddAccountRow = new RelayCommand(obj =>
                     {
-                        SetPassword(obj);
+                        SaveConfig(obj);
                     }));
             }
         }
 
-        public List<string> _Hero_classes { get; set; }
-        public List<string> Hero_classes
+        public CollectionView _Hero_classes { get; set; }
+        public CollectionView Hero_classes
         {
             get { return _Hero_classes; }
             set
@@ -45,8 +46,8 @@ namespace AutoLogin.ViewModel
             }
         }
 
-        private ComboBoxItem _SelectedClass { get; set; }
-        public ComboBoxItem SelectedClass
+        private string _SelectedClass { get; set; }
+        public string SelectedClass
         {
             get { return _SelectedClass; }
             set
@@ -67,24 +68,29 @@ namespace AutoLogin.ViewModel
 
             };
 
-            Hero_classes = new List<string>();
+            Hero_classes = new CollectionView(PW_classes);
             CreateAccount = new Account();
-            CreateAccount.Name = "Название записи";
-            CreateAccount.Login = "Логин";
+            CreateAccount.Name = "";
+            CreateAccount.Login = "";
             CreateAccount.Password = "";
-            CreateAccount.ClassImage = SetImageByName("Blademaster");
-            Hero_classes.AddRange(PW_classes.ToArray());
+            CreateAccount.ClassImage = SetImageByName("None");
+            
         }
 
-        void SetPassword(object parameter)
+        void SaveConfig(object parameter)
         {
             var passwordBox = parameter as PasswordBox;
             var password = passwordBox.Password;
 
-            if (SelectedClass is null)
-                return;
+            //Sanity checks
 
-            string fileImage = SetImageByName(SelectedClass.Content.ToString());
+            string fileImage = SetImageByName(SelectedClass);
+
+
+            //Can't save empty password, so
+            //fileImage by default can't be empty, anyways
+            if (password is "" || fileImage is "")
+                return;
 
             CreateAccount.Password = password;
             Accounts.Add(new Account()
