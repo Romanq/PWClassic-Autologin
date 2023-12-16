@@ -156,11 +156,11 @@
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="600"/>
+                            <ColumnDefinition Width="150"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="{Binding Name}" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-                        <Image Grid.Column="1" Source="{Binding Path=ClassImage}" HorizontalAlignment="Center"/>
+                        <Image Grid.Column="0" Source="{Binding Path=ClassImage}" HorizontalAlignment="Center" Width="36" Height="36"/>
+                        <TextBlock Grid.Column="1" Text="{Binding Name}" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
@@ -184,8 +184,8 @@
 
             <ListView.ContextMenu>
                 <ContextMenu Name="cm">
-                    <MenuItem Header="Запустить выбранные" Click="{data:MethodBinding StartSelectedAccounts, {Binding Path=SelectedAccount}}"/>
-                    <MenuItem Header="Удалить" Click="{data:MethodBinding DeleteSelectedAccount, {Binding Path=SelectedAccount}}"/>
+                    <MenuItem Header="Run selected" Click="{data:MethodBinding StartSelectedAccounts, {Binding Path=SelectedAccount}}"/>
+                    <MenuItem Header="Delete selected" Click="{data:MethodBinding DeleteSelectedAccount, {Binding Path=SelectedAccount}}"/>
                 </ContextMenu>
             </ListView.ContextMenu>
         </local:BindableMultiSelectListView>
@@ -195,7 +195,7 @@
                 HorizontalContentAlignment="Stretch"
                 Style="{StaticResource Flat_Button}"
                 FontSize="20"
-                Content="Добавить аккаунт" Command="{Binding ShowAccountForm}"/>
+                Content="Add new account" Command="{Binding ShowAccountForm}"/>
 
     </Grid>
 

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AutoLogin.ViewModel"
         mc:Ignorable="d"
-        Title="Добавление нового аккаунта" Height="400" Width="450" ResizeMode="NoResize">
+        Title="New account" Height="400" Width="450" ResizeMode="NoResize">
     <Window.Resources>
         <Style x:Key="Flat_Button" TargetType="{x:Type Button}">
 
@@ -110,13 +110,8 @@
                      FontSize="15"
                      VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                      Margin="20 0 20 5" />
-        <ComboBox Grid.Row="7" x:Name="isClass" SelectedItem="{Binding Path=SelectedClass}" Margin="20 0 20 5">
-            <ComboBoxItem Content="Вар" IsSelected="True"/>
-            <ComboBoxItem Content="Маг"/>
-            <ComboBoxItem Content="Танк"/>
-            <ComboBoxItem Content="Друид"/>
-            <ComboBoxItem Content="Лучник"/>
-            <ComboBoxItem Content="Прист"/>
+        <ComboBox Grid.Row="7" ItemsSource="{Binding Path=Hero_classes}" x:Name="isClass" SelectedItem="{Binding Path=SelectedClass}" Margin="20 0 20 5">
+
         </ComboBox>
         <Button  Grid.Row="9" Content="Сохранить данные" FontSize="15" Style="{StaticResource Flat_Button}" Command="{Binding AddAccountRow}"
                  CommandParameter="{Binding ElementName=tbPass}" IsDefault="True"/>

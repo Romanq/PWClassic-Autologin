@@ -1,5 +1,7 @@
 ﻿using AutoLogin.Accounts;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -20,6 +22,18 @@ namespace AutoLogin.ViewModel
                     }));
             }
         }
+
+        public List<string> _Hero_classes { get; set; }
+        public List<string> Hero_classes
+        {
+            get { return _Hero_classes; }
+            set
+            {
+                _Hero_classes = value;
+                OnPropertyChanged("Hero_classes");
+            }
+        }
+
         private Account _CreateAccount { get; set; }
         public Account CreateAccount
         {
@@ -44,17 +58,31 @@ namespace AutoLogin.ViewModel
 
         public AddAccountViewModel()
         {
+            string[] PW_classes = { 
+                
+                "Blademaster", "Wizard", "Barbarian", "Venomancer", "Archer",
+                "Cleric", "Psychic", "Assassin", "Mystic", "Seeker",
+                "Stormbringer", "Duskblade", "Technician", "Wildwalker", "Edgerunner",
+                "None"
+
+            };
+
+            Hero_classes = new List<string>();
             CreateAccount = new Account();
             CreateAccount.Name = "Название записи";
             CreateAccount.Login = "Логин";
             CreateAccount.Password = "";
-            CreateAccount.ClassImage = SetImageByName("Вар");
+            CreateAccount.ClassImage = SetImageByName("Blademaster");
+            Hero_classes.AddRange(PW_classes.ToArray());
         }
 
         void SetPassword(object parameter)
         {
             var passwordBox = parameter as PasswordBox;
             var password = passwordBox.Password;
+
+            if (SelectedClass is null)
+                return;
 
             string fileImage = SetImageByName(SelectedClass.Content.ToString());
 

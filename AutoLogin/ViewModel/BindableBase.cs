@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Security.Policy;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -12,6 +13,7 @@ namespace AutoLogin.ViewModel
 {
     public abstract class BindableBase : INotifyPropertyChanged
     {
+
         private static ObservableCollection<Account> _Accounts { get; set; }
         public ObservableCollection<Account> Accounts
         {
@@ -30,24 +32,45 @@ namespace AutoLogin.ViewModel
             
         }
 
+
         public string SetImageByName(string Name)
         {
+            var directory = Directory.GetCurrentDirectory();
+
             switch (Name)
             {
-                case "Вар":
-                    return Directory.GetCurrentDirectory() + @"\icons\ClassIcon_Blademaster.png";
-                case "Маг":
-                    return Directory.GetCurrentDirectory() + @"\icons\ClassIcon_Wizard.png";
-                case "Танк":
-                    return Directory.GetCurrentDirectory() + @"\icons\ClassIcon_Barbarian.png";
-                case "Друид":
-                    return Directory.GetCurrentDirectory() + @"\icons\ClassIcon_Venomancer.png";
-                case "Лучник":
-                    return Directory.GetCurrentDirectory() + @"\icons\ClassIcon_Archer.png";
-                case "Прист":
-                    return Directory.GetCurrentDirectory() + @"\icons\ClassIcon_Cleric.png";
+                case "Blademaster":
+                    return directory + @"\icons\ClassIcon_Blademaster.png";
+                case "Wizard":
+                    return directory + @"\icons\ClassIcon_Wizard.png";
+                case "Barbarian":
+                    return directory + @"\icons\ClassIcon_Barbarian.png";
+                case "Venomancer":
+                    return directory + @"\icons\ClassIcon_Venomancer.png";
+                case "Archer":
+                    return directory + @"\icons\ClassIcon_Archer.png";
+                case "Cleric":
+                    return directory + @"\icons\ClassIcon_Cleric.png";
+                case "Psychic":
+                    return directory + @"\icons\ClassIcon_Psychic.png";
+                case "Assassin":
+                    return directory + @"\icons\ClassIcon_Assassin.png";
+                case "Mystic":
+                    return directory + @"\icons\ClassIcon_Mystic.png";
+                case "Seeker":
+                    return directory + @"\icons\ClassIcon_Seeker.png";
+                case "Stormbringer":
+                    return directory + @"\icons\ClassIcon_Stormbringer.png";
+                case "Duskblade":
+                    return directory + @"\icons\ClassIcon_Duskblade.png";
+                case "Technician":
+                    return directory + @"\icons\ClassIcon_Technician.png";
+                case "Wildwalker":
+                    return directory + @"\icons\ClassIcon_Wildwalker.png";
+                case "Edgerunner":
+                    return directory + @"\icons\ClassIcon_Edgerunner.png";
                 default:
-                    return Directory.GetCurrentDirectory() + @"\icons\Classicon_None.png";
+                    return directory + @"\icons\Classicon_None.png";
             }
         }
 
