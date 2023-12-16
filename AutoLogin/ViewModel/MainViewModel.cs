@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -107,9 +108,34 @@ namespace AutoLogin.ViewModel
             }
         }
 
+
+        //default params: startbypatcher game:cpw console:1 user:* pwd:* role:*
+        // if nickname != ingame character name, then it stops on character selection, otherwise loggining in
+        // by default taking role as account note        public int StartGameProcess(string user, string pwd, string role)
+        public bool StartGameProcess(string user, string password, string role)
+        {
+            string GamePath = Logic.ini.Sections["GameSettings"].Keys["Path"].Value;
+
+            if (GamePath is null || GamePath == "")
+                return false;
+
+            Process proc = new Process()
+            {
+                StartInfo = new ProcessStartInfo()
+                {
+                    FileName = GamePath,
+                    WorkingDirectory = System.IO.Path.GetDirectoryName(GamePath),
+                    UseShellExecute = false,
+                    Arguments = $"startbypatcher game:cpw console:1 user:{user} pwd:{password} role:{role}"
+                }
+            };
+
+            return proc.Start();
+        }
+
         public void DeleteSelectedAccount(IList selectedAccounts)
         {
-            var userResult = MessageBox.Show("Подтвердите удаление данных", "PWClassic Autologin", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            var userResult = MessageBox.Show("Delete confirmation", "Perfect World Autologin", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (userResult == System.Windows.Forms.DialogResult.No)
                 return;
@@ -149,7 +175,7 @@ namespace AutoLogin.ViewModel
                 if (Accs[i].Login == "" || Accs[i].Password == "")
                     return;
 
-                
+                StartGameProcess(Accs[i].Login, Accs[i].Password, Accs[i].Name);
             }
 
         }

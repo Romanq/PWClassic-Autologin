@@ -90,7 +90,7 @@
         <local:AddAccountViewModel/>
     </Window.DataContext>
 
-    <Grid>
+    <Grid Background="#dce6df">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="7*"/>
             <ColumnDefinition Width="143*"/>

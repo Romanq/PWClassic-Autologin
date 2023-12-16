@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AutoLogin.ViewModel"
         xmlns:data="clr-namespace:AutoLogin"
         mc:Ignorable="d"
-        Title="PWClassic Autologin"
+        Title="Perfect World Autologin"
         ResizeMode="CanMinimize" Height="800" Width="800" WindowStyle="SingleBorderWindow">
 
     <Window.Resources>
@@ -137,7 +137,7 @@
         <local:MainViewModel/>
     </Window.DataContext>
 
-    <Grid Background="Azure">
+    <Grid Background="AliceBlue">
         <Grid.RowDefinitions>
             <RowDefinition Height="370*"/>
             <RowDefinition Height="50*"/>
@@ -149,7 +149,8 @@
             SelectedItems="{Binding Path=SelectedAccount, Mode=OneWayToSource}"
             ItemsSource="{Binding Path=Accounts}"
             MouseDoubleClick="{data:MethodBinding LoginSelectedAccount, {Binding Path=SelectedAccount}}"
-            SelectionMode="Extended">
+            SelectionMode="Extended"
+            Background="#dce6df">
 
 
             <ListView.ItemTemplate>
