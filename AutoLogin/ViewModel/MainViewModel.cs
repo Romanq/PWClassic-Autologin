@@ -1,4 +1,5 @@
 ﻿using AutoLogin.Accounts;
+using AutoLogin.Utils;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,6 +23,32 @@ namespace AutoLogin.ViewModel
                     {
                         AddAccount form = new AddAccount();
                         form.Show();
+                    }));
+            }
+        }
+
+        private RelayCommand _Batch_loading_dlg;
+        public RelayCommand Batch_loading_dlg
+        {
+            get
+            {
+                return _Batch_loading_dlg ??
+                    (_Batch_loading_dlg = new RelayCommand(obj =>
+                    {
+                        Batch_loading();
+                    }));
+            }
+        }
+
+        private RelayCommand _Pathchange_dlg;
+        public RelayCommand Pathchange_dlg
+        {
+            get
+            {
+                return _Pathchange_dlg ??
+                    (_Pathchange_dlg = new RelayCommand(obj =>
+                    {
+                        Gamepath_change();
                     }));
             }
         }
@@ -95,23 +122,10 @@ namespace AutoLogin.ViewModel
             }
         }
 
-        public void LoginSelectedAccount(IList selectedAccounts)
-        {
-            foreach (var item in selectedAccounts)
-            {
-                var converted = item as Account;
-                if (converted.Login == "" || converted.Password == ""
-                    || converted.Login is null || converted.Password is null)
-                    return;
-
-
-            }
-        }
-
 
         //default params: startbypatcher game:cpw console:1 user:* pwd:* role:*
         // if nickname != ingame character name, then it stops on character selection, otherwise loggining in
-        // by default taking role as account note        public int StartGameProcess(string user, string pwd, string role)
+        // by default taking role as account note
         public bool StartGameProcess(string user, string password, string role)
         {
             string GamePath = Logic.ini.Sections["GameSettings"].Keys["Path"].Value;
@@ -124,7 +138,7 @@ namespace AutoLogin.ViewModel
                 StartInfo = new ProcessStartInfo()
                 {
                     FileName = GamePath,
-                    WorkingDirectory = System.IO.Path.GetDirectoryName(GamePath),
+                    WorkingDirectory = Path.GetDirectoryName(GamePath),
                     UseShellExecute = false,
                     Arguments = $"startbypatcher game:cpw console:1 user:{user} pwd:{password} role:{role}"
                 }
@@ -178,6 +192,58 @@ namespace AutoLogin.ViewModel
                 StartGameProcess(Accs[i].Login, Accs[i].Password, Accs[i].Name);
             }
 
+        }
+
+
+        // Batch reading .bat file's.
+        // GamePath already exist
+        public bool Batch_loading()
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "bat files (*.bat)|*.bat";
+            ofd.Multiselect = true;
+
+            DialogResult result = (DialogResult)ofd.ShowDialog();
+            if (result != DialogResult.Ok)
+                return false;
+
+
+            List<Account> account_list = new List<Account>();
+
+            foreach (var file in ofd.FileNames)
+            {
+                Account parsed = Helper.Parse(file);
+
+                if (parsed is null) continue;
+
+                account_list.Add(parsed);
+            }
+
+
+            foreach (var account in account_list)
+            {
+                Helper.Save_account(account);
+                Accounts.Add(account);
+            }
+
+
+            return true;
+        }
+
+        public bool Gamepath_change()
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "elementclient (elementclient.exe)|elementclient.exe";
+            DialogResult result = (DialogResult)ofd.ShowDialog();
+            if (result == DialogResult.Ok)
+            {
+                var filePath = ofd.FileName;
+                Logic.ini.Sections.Add("GameSettings").Keys.Add("Path").Value = filePath;
+                Logic.ini.Save("Config.ini");
+                return true;
+
+            }
+            else return false;
         }
     }
 }

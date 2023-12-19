@@ -137,11 +137,36 @@
         <local:MainViewModel/>
     </Window.DataContext>
 
-    <Grid Background="AliceBlue">
+
+    <Grid Background="#dce6df">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="12*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="15*"/>
             <RowDefinition Height="370*"/>
             <RowDefinition Height="50*"/>
         </Grid.RowDefinitions>
+
+        <Button Grid.Row="0"
+                Foreground="#dce6df"
+                HorizontalContentAlignment="Stretch"
+                Style="{StaticResource Flat_Button}"
+                FontSize="12"
+                Name="Batch_loading"
+                Content="Load from .bat" Command="{Binding Batch_loading_dlg}" Grid.ColumnSpan="1" Margin="2,2,2,2"/>
+
+        <Button Grid.Row="0" Grid.Column="1"
+                Foreground="#dce6df"
+                HorizontalContentAlignment="Stretch"
+                Style="{StaticResource Flat_Button}"
+                FontSize="12"
+                Name="Gamepath_change"
+                Content="Change exe path" Command="{Binding Pathchange_dlg}" Grid.ColumnSpan="1" Margin="2,2,2,2"/>
+
+        <Line Name="delimeter" Opacity="0"  />
 
         <local:BindableMultiSelectListView
             x:Name="lstBox" 
@@ -150,7 +175,8 @@
             ItemsSource="{Binding Path=Accounts}"
             MouseDoubleClick="{data:MethodBinding LoginSelectedAccount, {Binding Path=SelectedAccount}}"
             SelectionMode="Extended"
-            Background="#dce6df">
+            Background="#dce6df" Grid.ColumnSpan="3" Margin="0,27,0,90" Grid.RowSpan="3">
+
 
 
             <ListView.ItemTemplate>
@@ -190,13 +216,14 @@
                 </ContextMenu>
             </ListView.ContextMenu>
         </local:BindableMultiSelectListView>
-        
-        <Button Grid.Row="1"
+
+        <Button Grid.Row="2"
+                Name="Account_add"
                 Foreground="White"
                 HorizontalContentAlignment="Stretch"
                 Style="{StaticResource Flat_Button}"
                 FontSize="20"
-                Content="Add new account" Command="{Binding ShowAccountForm}"/>
+                Content="Add new account" Command="{Binding ShowAccountForm}" Grid.ColumnSpan="3" Margin="2,2,2,2"/>
 
     </Grid>
 

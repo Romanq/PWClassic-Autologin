@@ -32,48 +32,6 @@ namespace AutoLogin.ViewModel
             
         }
 
-
-        public string SetImageByName(string Name)
-        {
-            var directory = Directory.GetCurrentDirectory();
-
-            switch (Name)
-            {
-                case "Blademaster":
-                    return directory + @"\icons\ClassIcon_Blademaster.png";
-                case "Wizard":
-                    return directory + @"\icons\ClassIcon_Wizard.png";
-                case "Barbarian":
-                    return directory + @"\icons\ClassIcon_Barbarian.png";
-                case "Venomancer":
-                    return directory + @"\icons\ClassIcon_Venomancer.png";
-                case "Archer":
-                    return directory + @"\icons\ClassIcon_Archer.png";
-                case "Cleric":
-                    return directory + @"\icons\ClassIcon_Cleric.png";
-                case "Psychic":
-                    return directory + @"\icons\ClassIcon_Psychic.png";
-                case "Assassin":
-                    return directory + @"\icons\ClassIcon_Assassin.png";
-                case "Mystic":
-                    return directory + @"\icons\ClassIcon_Mystic.png";
-                case "Seeker":
-                    return directory + @"\icons\ClassIcon_Seeker.png";
-                case "Stormbringer":
-                    return directory + @"\icons\ClassIcon_Stormbringer.png";
-                case "Duskblade":
-                    return directory + @"\icons\ClassIcon_Duskblade.png";
-                case "Technician":
-                    return directory + @"\icons\ClassIcon_Technician.png";
-                case "Wildwalker":
-                    return directory + @"\icons\ClassIcon_Wildwalker.png";
-                case "Edgerunner":
-                    return directory + @"\icons\ClassIcon_Edgerunner.png";
-                default:
-                    return directory + @"\icons\Classicon_None.png";
-            }
-        }
-
         protected virtual bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
         {
             if (object.Equals((object)storage, (object)value))

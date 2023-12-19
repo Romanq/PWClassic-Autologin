@@ -105,6 +105,7 @@
     </ApplicationDefinition>
     <Compile Include="MethodBinding.cs" />
     <Compile Include="RelayCommand.cs" />
+    <Compile Include="Utils\Utils.cs" />
     <Compile Include="ViewModel\AddAccountViewModel.cs" />
     <Compile Include="ViewModel\BindableBase.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />

@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using AutoLogin.Utils;
 
 namespace AutoLogin.ViewModel
 {
@@ -73,7 +74,7 @@ namespace AutoLogin.ViewModel
             CreateAccount.Name = "";
             CreateAccount.Login = "";
             CreateAccount.Password = "";
-            CreateAccount.ClassImage = SetImageByName("None");
+            CreateAccount.ClassImage = Helper.SetImageByName("None");
             
         }
 
@@ -84,7 +85,7 @@ namespace AutoLogin.ViewModel
 
             //Sanity checks
 
-            string fileImage = SetImageByName(SelectedClass);
+            string fileImage = Helper.SetImageByName(SelectedClass);
 
 
             //Can't save empty password, so
