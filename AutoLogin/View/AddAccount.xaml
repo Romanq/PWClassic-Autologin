@@ -117,10 +117,10 @@
         <Label Content="Account password:" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
         <PasswordBox x:Name="tbPass" Grid.Row="4"
                      FontSize="15"
-                     Margin="20,42,20,5" Grid.ColumnSpan="2" Grid.RowSpan="2" />
+                     Margin="20,42,20,42" Grid.ColumnSpan="2" Grid.RowSpan="3" />
 
         <Label Content="Class:" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
-        <ComboBox Grid.Row="7" ItemsSource="{Binding Path=Hero_classes}" x:Name="isClass" SelectedItem="{Binding Path=SelectedClass}" Margin="20 0 20 5" Grid.ColumnSpan="2"/>
+        <ComboBox Grid.Row="7" ItemsSource="{Binding Hero_classes}" x:Name="isClass" SelectedItem="{Binding SelectedClass}" Margin="20,0,20,42" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
         <Button  Grid.Row="9" Content="Save" FontSize="15" Style="{StaticResource Flat_Button}" Command="{Binding AddAccountRow}"
                  CommandParameter="{Binding ElementName=tbPass}" IsDefault="True" Grid.ColumnSpan="2"/>
     </Grid>
